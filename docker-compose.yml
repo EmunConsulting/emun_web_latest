@@ -12,13 +12,13 @@ services:
   django_app:
     image: django_app
     build:
-      context: ./emun_production
+      context: ./emunDjango
     container_name: "django_cont"
     ports:
       - 8001:8001
     command: gunicorn emun.wsgi --bind 0.0.0.0:8001
     env_file:
-      - "./emun_production/.env"
+      - "./emunDjango/.env"
     depends_on:
       - db
   db:
