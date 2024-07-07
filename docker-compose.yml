@@ -8,9 +8,9 @@ services:
     ports:
       - 80:80
     volumes:
-      - web-static: /usr/src/emunDjango/static
-      - web-forms: /usr/src/emunDjango/forms
-      - web-media: /usr/src/emunDjango/media
+      - web-static: /www/static
+      - web-forms: /www/forms
+      - web-media: /www/media
     depends_on:
       - django_app
   django_app:
