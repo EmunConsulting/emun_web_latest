@@ -7,12 +7,24 @@ services:
     container_name: "nginx_cont"
     ports:
       - 80:80
+    volumes:
+      - web-static: /usr/src/emunDjango/static
+      - web-forms: /usr/src/emunDjango/forms
+      - web-media: /usr/src/emunDjango/media
     depends_on:
       - django_app
   django_app:
     image: django_app
     build:
       context: ./emunDjango
+    links: 
+      -db:db
+    volumes:
+      - web-django: /usr/src/emunDjango
+      - web-static: /usr/src/emunDjango/static
+      - web-forms: /usr/src/emunDjango/forms
+      - web-media: /usr/src/emunDjango/media
+      
     container_name: "django_cont"
     ports:
       - 8001:8001
@@ -28,4 +40,11 @@ services:
       - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_DATABASE=emun_db
     volumes:
-      - ./data/mysql/db:/var/lib/mysql
+      - mysqldata:/var/lib/mysql/data
+volumes:
+  db:
+  web-static:
+  web-forms:
+  web-media:
+  web-django:
+
