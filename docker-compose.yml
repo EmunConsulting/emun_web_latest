@@ -1,18 +1,6 @@
 version: "3.8"
 
 services:
-  nginx:
-    build: ./nginx
-    image: nginx
-    container_name: "nginx_cont"
-    ports:
-      - 80:80
-    volumes:
-      - web-static: /www/static
-      - web-forms: /www/forms
-      - web-media: /www/media
-    depends_on:
-      - django_app
   django_app:
     image: django_app
     build:
@@ -33,6 +21,19 @@ services:
       - "./emunDjango/.env"
     depends_on:
       - db
+  nginx:
+    build: ./nginx
+    image: nginx
+    container_name: "nginx_cont"
+    ports:
+      - 80:80
+    volumes:
+      - web-static: /www/static
+      - web-forms: /www/forms
+      - web-media: /www/media
+    depends_on:
+      - django_app
+ 
   db:
     image: mysql
     container_name: "db_cont"
