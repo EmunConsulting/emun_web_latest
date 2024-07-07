@@ -5,8 +5,6 @@ services:
     image: django_app
     build:
       context: ./emunDjango
-    links: 
-      -db:db
     volumes:
       - web-django: /usr/src/emunDjango
       - web-static: /usr/src/emunDjango/static
